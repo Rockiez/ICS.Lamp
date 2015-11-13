@@ -1,0 +1,59 @@
+﻿<Window x:Class="ICS.Lamp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="智能路灯" Height="900" Width="1440" WindowState="Maximized" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="98*"/>
+            <RowDefinition Height="782*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="Resources/bg_title_lamp.png"/>
+            </Grid.Background>
+            <Button VerticalAlignment="Top" Click="Button_Click_1" HorizontalAlignment="Right" Margin="0,0,35.333,0" Width="39" Height="36" Style="{StaticResource MiniButtonTemplate}"/>
+            <Button VerticalAlignment="Top" Click="Button_Click_2" HorizontalAlignment="Right" Margin="0,0,0,0" Width="39" Height="36" Style="{StaticResource ClosedButtonTemplate}"/>
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.Background>
+                <ImageBrush ImageSource="Resources/bg_lamp.png"/>
+            </Grid.Background>
+            <Grid Width="1180" Height="660">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/bg_frame_boot_green.png"/>
+                </Grid.Background>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="85*"/>
+                    <ColumnDefinition Width="1050*"/>
+                    <ColumnDefinition Width="45*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60*"/>
+                    <RowDefinition Height="550*"/>
+                    <RowDefinition Height="50*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Image Source="Resources/tab_green.png" Margin="38,0,0.333,242"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Resources/bg_frame_descend.png"/>
+                    </Grid.Background>
+                    <Image Source="Resources/lamp_off.png" Margin="226,254,752,271" x:Name="imgs" MouseLeftButtonUp="Image_MouseLeftButtonUp_1"/>
+                    <Image Source="Resources/btn_switch_off.png" Margin="351,254,627,271" x:Name="imgss" MouseLeftButtonUp="Image_MouseLeftButtonUp_2" RenderTransformOrigin="0.5,0.507"/>
+                    <Image Source="Resources/lamp_off.png" Margin="548,254,430,271" x:Name="imgc" MouseLeftButtonUp="Image_MouseLeftButtonUp_3"/>
+                    <Image Source="Resources/btn_switch_off.png" Margin="693,254,285,271" x:Name="imgcs" MouseLeftButtonUp="Image_MouseLeftButtonUp_4"/>
+
+                    <Label VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="White" FontSize="20" Margin="0,250,693,0" Content=" 路灯："/>
+                    <Label VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="White" FontSize="20" Margin="0,250,357,0" Content=" 楼道灯："/>
+
+                </Grid>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Background="#ff377b00">
+            <Label HorizontalAlignment="Right" VerticalAlignment="Top" Foreground="White" Margin="0,-2,0.333,-3" Content="北京新大陆时代教育有限公司" />
+        </Grid>
+    </Grid>
+</Window>
