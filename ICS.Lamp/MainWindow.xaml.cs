@@ -40,6 +40,7 @@ namespace ICS.Lamp
         }
 
         ADAM4150 adam = Global.ADAM4150Provider;
+
         public void Onoffmain()
         {
             ResultEntity bret = drivestate();
@@ -94,8 +95,6 @@ namespace ICS.Lamp
         public void Offonstartc(){
             var cbutton = new Onoffbutton( imgc, imgcs, con, coff,"操作楼道灯失败");
             cbutton.Onoffmain();
-            int a = 1;
-            int b = a + 1;
         }
 
         public void Offonstarts(){
