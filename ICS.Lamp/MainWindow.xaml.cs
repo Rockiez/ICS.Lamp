@@ -17,100 +17,71 @@ using ICS.Common;
 
 namespace ICS.Lamp
 {
-
     public class Onoffbutton : Window
     {
-        Image lampimg, onoffimg;
-        byte[] oncode, offcode;
-        string errormessage;
-        bool _bs;
-
-        public Onoffbutton(Image lampimg , Image onoffimg, byte[] oncode, byte[] offcode, string errormessage)
-        {
-            this.lampimg = lampimg;
-            this.onoffimg = onoffimg;
-            this.oncode = oncode;
-            this.offcode = offcode;
-            this.errormessage = errormessage;
-        }
-
-        ResultEntity drivestate()
-        {
-            return Global.ADAM4150Provider.CheckSerialPort(Global.ADAM4150Provider.ADAM4017Provider);
-        }
-
-        ADAM4150 adam = Global.ADAM4150Provider;
+        public Image Lampimg, Onoffimg;
+        public byte[] Oncode, Offcode;
+        public string Errormessage;
+        public bool Boolstate;
 
         public void Onoffmain()
         {
-            ResultEntity bret = drivestate();
+            var bret = Global.ADAM4150Provider.CheckSerialPort(Global.ADAM4150Provider.ADAM4017Provider);
             if (bret.Status == RunStatus.Failure)
                 MessageBox.Show(bret.ResultMessage);
             else
             {
-                bool adamResult = adam.OnOff(_bs ? offcode : oncode); 
+                var adamResult = Global.ADAM4150Provider.OnOff(Boolstate ? Offcode : Oncode); 
                 if (adamResult)
                 {
-                    _bs = !_bs;
+                    Boolstate = !Boolstate;
                     Setimages();
                 }
                 else
-                    MessageBox.Show(errormessage);
+                    MessageBox.Show(Errormessage);
             }
         }
 
         void Quickimg(string imgstringf, string imgstrings)
         {
-            lampimg.Source = new BitmapImage(new Uri(imgstringf, UriKind.Relative));
-            onoffimg.Source = new BitmapImage(new Uri(imgstrings, UriKind.Relative));
+            Lampimg.Source = new BitmapImage(new Uri(imgstringf, UriKind.Relative));
+            Onoffimg.Source = new BitmapImage(new Uri(imgstrings, UriKind.Relative));
         }
 
         void Setimages()
         {
-            if (_bs)
+            if (Boolstate)
                 Quickimg("Resources/lamp_on.png", "Resources/btn_switch_on.png");
             else
                 Quickimg("Resources/lamp_off.png", "Resources/btn_switch_off.png");
         }
     }
 
-
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        Onoffbutton cbutton;
+        Onoffbutton sbutton;
 
-        private void Image_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e){Offonstarts();}
-        private void Image_MouseLeftButtonUp_2(object sender, MouseButtonEventArgs e){Offonstarts();}
-        private void Image_MouseLeftButtonUp_3(object sender, MouseButtonEventArgs e){Offonstartc();}
-        private void Image_MouseLeftButtonUp_4(object sender, MouseButtonEventArgs e){Offonstartc();}
 
         byte[] con = new byte[] { 0x01, 0x05, 0x00, 0x11, 0xFF, 0x00, 0xDC, 0x3F };
         byte[] coff = new byte[] { 0x01, 0x05, 0x00, 0x11, 0x00, 0x00, 0x9D, 0xCF };
         byte[] son = new byte[] { 0x01, 0x05, 0x00, 0x12, 0xFF, 0x00, 0x2C, 0x3F };
         byte[] soff = new byte[] { 0x01, 0x05, 0x00, 0x12, 0x00, 0x00, 0x6D, 0xCF };
 
-        public void Offonstartc(){
-            var cbutton = new Onoffbutton( imgc, imgcs, con, coff,"操作楼道灯失败");
-            cbutton.Onoffmain();
-        }
-
-        public void Offonstarts(){
-            var sbutton = new Onoffbutton(imgs, imgss, son, soff, "操作街道等失败");
-            sbutton.Onoffmain();
-        }
-
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        public MainWindow()
         {
-            WindowState = WindowState.Minimized;
+            InitializeComponent();
+            cbutton = new Onoffbutton {Lampimg = imgc, Onoffimg = imgcs, Oncode = con, Offcode = coff,Errormessage = "操作楼道灯失败"};
+            sbutton = new Onoffbutton { Lampimg = imgs, Onoffimg = imgss, Oncode = son, Offcode = soff, Errormessage = "操作街道等失败" };
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        private void Image_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e) { sbutton.Onoffmain(); }
+        private void Image_MouseLeftButtonUp_2(object sender, MouseButtonEventArgs e) { sbutton.Onoffmain(); }
+        private void Image_MouseLeftButtonUp_3(object sender, MouseButtonEventArgs e) { cbutton.Onoffmain(); }
+        private void Image_MouseLeftButtonUp_4(object sender, MouseButtonEventArgs e) { cbutton.Onoffmain(); }
+
+        
+        private void Button_Click_1(object sender, RoutedEventArgs e){WindowState = WindowState.Minimized;}
+        private void Button_Click_2(object sender, RoutedEventArgs e){Close();}
     }
 }
