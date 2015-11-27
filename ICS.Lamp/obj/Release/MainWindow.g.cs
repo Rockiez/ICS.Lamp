@@ -56,7 +56,7 @@ namespace ICS.Lamp {
         #line hidden
         
         
-        #line 55 "..\..\MainWindow.xaml"
+        #line 46 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Image imgc;
         
@@ -64,7 +64,7 @@ namespace ICS.Lamp {
         #line hidden
         
         
-        #line 56 "..\..\MainWindow.xaml"
+        #line 47 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Image imgcs;
         
@@ -138,7 +138,7 @@ namespace ICS.Lamp {
             case 5:
             this.imgc = ((System.Windows.Controls.Image)(target));
             
-            #line 55 "..\..\MainWindow.xaml"
+            #line 46 "..\..\MainWindow.xaml"
             this.imgc.MouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.Image_MouseLeftButtonUp_3);
             
             #line default
@@ -147,7 +147,7 @@ namespace ICS.Lamp {
             case 6:
             this.imgcs = ((System.Windows.Controls.Image)(target));
             
-            #line 56 "..\..\MainWindow.xaml"
+            #line 47 "..\..\MainWindow.xaml"
             this.imgcs.MouseLeftButtonUp += new System.Windows.Input.MouseButtonEventHandler(this.Image_MouseLeftButtonUp_4);
             
             #line default
